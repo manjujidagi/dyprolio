@@ -1,0 +1,54 @@
+<div class="row">
+    <div *ngFor="let product of products" class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+        <div class="card card-statistics shadow rounded" 
+            (click)="showBig(mymodal, product)"
+            style="cursor: pointer;"
+        >
+            <div class="card-body">
+                <div class="clearfix">
+                <h4>{{product.product_name}}</h4>
+                
+                <hr />
+                
+                <ngb-carousel>
+                    <ng-template ngbSlide *ngFor="let product_image of product.product_images">
+                        <img src="{{product_image.image}}" alt="{{product.product_name}}" style="width: 100%; height: 250px;">
+                    </ng-template>
+                </ngb-carousel>
+                
+                <hr />
+                
+                <h5>Rs. <s>{{product.price}}</s> {{product.discounted_price}}</h5>
+                {{product.product_description}}
+                </div>
+            </div>
+            </div>
+    </div>
+
+
+    <ng-template #mymodal let-modal>
+        
+        <div class="modal-header">
+            <h4 class="modal-title">{{selectedProduct.product_name}}</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">&times;</button>
+        </div>
+            
+        <div class="modal-body">
+            <div class="clearfix">
+
+                <ngb-carousel>
+                    <ng-template ngbSlide *ngFor="let product_image of selectedProduct.product_images">
+                        <img src="{{product_image.image}}" alt="{{selectedProduct.product_name}}" width="100%" height="auto" />
+                    </ng-template>
+                </ngb-carousel>
+
+                <hr />
+                
+                <h5>Rs. <s>{{selectedProduct.price}}</s> {{selectedProduct.discounted_price}}</h5>
+                {{selectedProduct.product_description}}
+            </div>
+        </div>
+
+    </ng-template>
+
+</div>

@@ -1,0 +1,64 @@
+<div class="container-scroller">
+    <app-navbar [active]="page"></app-navbar>
+    <div class="container-fluid page-body-wrapper">
+      <div class="main-panel" style="width: 100%;">
+        <div class="content-wrapper">
+
+            <div class="row">
+              <app-data-management-add-product></app-data-management-add-product>
+            </div>
+
+            <div class="row">
+
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 grid-margin stretch-card" *ngFor="let product of products">
+
+                <div class="card card-statistics shadow rounded">
+                  <div class="card-body">
+                      <p style="float: right;"><app-data-management-edit-product [selectedProduct]="product" ></app-data-management-edit-product></p>
+                      <h2>{{product.product_name}}</h2>
+                      <small>{{product.product_description}}</small>
+                      <br />
+                      <small>Original Price - {{product.price}}</small>
+                      <br />
+                      <small>Discounted Price   - {{product.discounted_price}}</small>
+                      <br /><br />
+
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <td align="center"><b>Image</b></td>
+                            <td align="center"><b>Banner</b></td>
+                            <td align="center"><b>Featured</b></td>
+                          </tr>
+                        </thead>
+                        <tr *ngFor="let product_image of product.product_images">
+                          
+                          <td align="center"><img src="{{product_image.image}}" /></td>
+                          
+                          <td align="center">
+                            <div *ngIf="product_image.banner;then bannerTrue else bannerFalse">----</div>
+                            <ng-template #bannerTrue>Yes</ng-template>
+                            <ng-template #bannerFalse>No</ng-template>
+                          </td>
+
+                          <td align="center">
+                            <div *ngIf="product_image.featured;then featuredTrue else featuredFalse">----</div>
+                            <ng-template #featuredTrue>Yes</ng-template>
+                            <ng-template #featuredFalse>No</ng-template>
+                          </td>
+
+                        </tr>
+                      </table>
+
+                  </div>
+                </div>
+  
+              </div>
+
+            </div>
+
+        </div>
+        <app-footer></app-footer>
+      </div>
+    </div>
+</div>

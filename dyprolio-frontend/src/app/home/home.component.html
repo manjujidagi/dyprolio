@@ -1,0 +1,13 @@
+<div class="container-scroller">
+  <app-navbar [active]="page"></app-navbar>
+  <div class="container-fluid page-body-wrapper">
+    <div class="main-panel" style="width: 100%;">
+      <div class="content-wrapper">
+        <app-product-top-banner [featuredOnly]="featuredOnly"></app-product-top-banner>
+        <br />
+        <app-product-list [featuredOnly]="featuredOnly"></app-product-list>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </div>
+</div>

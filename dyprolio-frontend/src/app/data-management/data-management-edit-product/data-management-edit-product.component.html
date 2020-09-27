@@ -1,0 +1,68 @@
+<div>
+
+    <button type="button" class="btn btn-primary" (click)="showEditProductModal(editProductModal)">Edit</button>
+    <br />
+
+    <ng-template #editProductModal let-modal>
+        
+        <div class="modal-header">
+            <h4 class="modal-title">Edit Product</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">&times;</button>
+        </div>
+            
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="product_name">Product Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" [(ngModel)]="product_name" placeholder="Product Name" />
+            </div>
+            <div class="form-group">
+                <label for="product_description">Product Description</label>
+                <textarea class="form-control" id="product_description" name="product_description" [(ngModel)]="product_description" placeholder="Product Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" name="price" [(ngModel)]="price" placeholder="Price" />
+            </div>
+            <div class="form-group">
+                <label for="discounted_price">Discounted Price</label>
+                <input type="text" class="form-control" id="discounted_price" name="discounted_price" [(ngModel)]="discounted_price" placeholder="Discounted Price" />
+            </div>
+
+            <div *ngFor="let product_image of product_images; let i=index;">
+
+                <hr />
+
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <ng-container *ngIf="product_image.image; then showImage; else showAddImage"></ng-container>
+                    <ng-template #showImage>
+                        <img src="{{product_image.image}}" width="100%" height="auto" />
+                    </ng-template>
+                    <ng-template #showAddImage>
+                        <input type="file" class="form-control" name="image" (change)="fileChanged($event, i)" />
+                    </ng-template>
+                    <button type="button" class="btn btn-primary" (click)="deleteImage(i)">Delete Image</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="banner">Banner</label>
+                    <input type="checkbox" class="form-control" name="banner" [(ngModel)]="product_image.banner" />
+                </div>
+
+                <div class="form-group">
+                    <label for="featured">Featured</label>
+                    <input type="checkbox" class="form-control" name="featured" [(ngModel)]="product_image.featured" />
+                </div>
+
+            </div>
+
+
+            <button type="button" class="btn btn-primary" (click)="addImage()">Add Image</button>
+
+            <button type="button" class="btn btn-secondary" (click)="editProduct()">Edit Product</button>
+
+        </div>
+
+    </ng-template>
+
+</div>
